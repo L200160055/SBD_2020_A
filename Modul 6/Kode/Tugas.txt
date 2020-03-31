@@ -1,0 +1,20 @@
+SELECT nama_nasabah, alamat_nasabah FROM nasabah ORDER BY nama_nasabah;
+
+SELECT jenis_transaksi, jumlah FROM transaksi WHERE jenis_transaksi="kredit";
+
+SELECT jenis_transaksi, jumlah FROM transaksi WHERE tanggal="2009-11-21" ORDER BY jumlah;
+
+SELECT no_transaksi, jenis_transaksi, jumlah FROM transaksi WHERE jumlah=20000;
+
+SELECT nama_nasabah, alamat_nasabah FROM nasabah WHERE nama_nasabah LIKE "Su%";
+
+SELECT jenis_transaksi, jumlah FROM transaksi WHERE jenis_transaksi="debit";
+
+SELECT no_transaksi, jenis_transaksi, jumlah FROM transaksi WHERE jumlah=20000;
+
+SELECT * FROM nasabah ORDER BY id_nasabah LIMIT 2 OFFSET 2;
+
+SELECT * FROM rekening WHERE kode_cabangFK IS NULL;
+
+SELECT * FROM nasabah WHERE nama_nasabah IS NULL ORDER BY id_nasabah LIMIT 2 OFFSET 2;
+

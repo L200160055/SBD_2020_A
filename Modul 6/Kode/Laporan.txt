@@ -1,0 +1,10 @@
+cd\
+cd xampp\mysql\bin
+
+mysql -u root -p
+
+use perbankan;
+
+SELECT nama_cabang, alamat_cabang FROM cabang_bank ORDER BY nama_cabang;
+
+SELECT no_rekening, pin, saldo FROM rekening ORDER BY saldo DESC;
