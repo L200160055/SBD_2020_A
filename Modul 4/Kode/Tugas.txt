@@ -1,0 +1,26 @@
+cd\
+cd xampp\mysql\bin
+
+mysql -u root -p
+
+create database kuliah;
+
+use kuliah;
+
+CREATE TABLE mahasiswa(
+	id_mahasiswa INTEGER PRIMARY KEY,
+	nama_mahasiswa VARCHAR(45) NOT NULL,
+	alamat_mahasiswa VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE matakuliah(
+	id_matakuliah INTEGER PRIMARY KEY,
+	nama_matakuliah VARCHAR(45) NOT NULL
+);
+
+CREATE TABLE mahasiswa_has_matakuliah(
+	id_mahasiswaFK INTEGER REFERENCES mahasiswa(id_mahasiswa)
+	ON DELETE CASCADE ON UPDATE CASCADE,
+	id_matakuliahFK INTEGER REFERENCES matakuliah(id_matakuliah)
+	ON DELETE CASCADE ON UPDATE CASCADE
+);
