@@ -1,0 +1,131 @@
+Entitas:
+	- mahasiswa
+	- buku
+	- pengarang
+	- penerbit
+	- daftarPinjam
+
+Atribut:
+	- mahasiswa:
+		- nim			VARCHAR(10)	PRIMARY KEY
+		- nama			VARCHAR(25)	NOT NULL
+		- kelas X
+		- gender X
+	- buku:
+		- kodeBuku		VARCHAR(10)	UNIQUE	
+		- kodeEksemplar		VARCHAR(10)	PRIMARY KEY
+		- judulBuku		VARCHAR(25)	NOT NULL
+		- edisi X
+		- tahunTerbit		INTEGER		NOT NULL
+	- pengarang:
+		- kodePengarang		VARCHAR(10)	PRIMARY KEY
+		- namaPengarang		VARCHAR(25)	NOT NULL
+		- titlePengarang X	
+	- penerbit:
+		- kodePenerbit		VARCHAR(10)	PRIMARY KEY
+		- namaPenerbit		VARCHAR(25)	NOT NULL
+	- daftarPinjam:
+		- nomorPinjam		INTEGER		PRIMARY KEY	
+		- kode_buku		VARCHAR(10)	NOT NULL
+		- tglPinjam		DATE		NOT NULL
+		- tglDikembalikan	DATE		NOT NULL
+		- terlambat		INTEGER		
+		- denda			INTEGER		
+
+Relationship:
+	- mahasiswa meminjam buku: One-to-Many(1:n)
+	atribute penghubung: nim(FK nim di buku)
+	- pengarang mengarang buku: One-to-Many (1:n)
+	atribute penghubung: kodePengarang(FK kodePengarang di buku)
+	- penerbit menerbitkan buku: One-to-Many (1:n)
+	atribute penghubung: kodePenerbit(FK kodePenerbit di buku)
+	- mahasiswa memiliki daftarPinjaman: One-to-Many(1:n)
+	atribute penghubung: nim(FK nim di daftarPinjaman)
+
+
+
+
+cd\
+cd xampp\mysql\bin
+
+mysql -u root -p
+
+CREATE DATABASE perpustakaan;
+USE perpustakaan;
+	
+CREATE TABLE mahasiswa(
+	nim VARCHAR(10) PRIMARY KEY,
+	nama VARCHAR(25) NOT NULL
+);
+
+INSERT INTO mahasiswa(nim,nama) VALUES
+('n1','nama1'),('n2','nama2'),
+('n3','nama3'),('n4','nama4'),
+('n5','nama5'),('n6','nama6'),
+('n7','nama7'),('n8','nama8'),
+('n9','nama9'),('n10','nama10');
+
+nimFK X
+
+CREATE TABLE buku(
+	kodeEksemplar VARCHAR(10) PRIMARY KEY,
+	kodeBuku VARCHAR(10) NOT NULL,
+	judulBuku VARCHAR(25) NOT NULL,
+	tahunTerbit DATE NOT NULL,
+	kodePenerbitFK VARCHAR(10) NOT NULL,
+	kodePengarangFK VARCHAR(10) NOT NULL
+);
+
+INSERT INTO buku(kodeEksemplar,kodeBuku, judulBuku, tahunTerbit, kodePenerbitFK, kodePengarangFK) VALUES
+('kb1-ke1','kb1','judul1',2019,'kpene1','kpeng1'),
+('kb1-ke2','kb1','judul1',2019,'kpene1','kpeng1'),
+('kb1-ke3','kb1','judul1',2019,'kpene1','kpeng1'),
+('kb1-ke4','kb1','judul1',2019,'kpene1','kpeng1'),
+('kb1-ke5','kb1','judul1',2019,'kpene1','kpeng1'),
+('kb2-ke1','kb2','judul2',2020,'kpene1','kpeng2'),
+('kb2-ke2','kb2','judul2',2020,'kpene1','kpeng2'),
+('kb2-ke3','kb2','judul2',2020,'kpene1','kpeng2'),
+('kb2-ke4','kb2','judul2',2020,'kpene1','kpeng2'),
+('kb2-ke5','kb2','judul2',2020,'kpene1','kpeng2');
+
+CREATE TABLE penerbit(
+	kodePenerbit VARCHAR(10) PRIMARY KEY,
+	namaPenerbit VARCHAR(25) NOT NULL
+);
+
+INSERT INTO penerbit(kodePenerbit,namaPenerbit) VALUES
+('kpene1','penerbit1'),('kpene2','penerbit2'),
+('kpene3','penerbit3'),('kpene4','penerbit4'),
+('kpene5','penerbit5'),('kpene6','penerbit6'),
+('kpene7','penerbit7'),('kpene8','penerbit8'),
+('kpene9','penerbit9'),('kpene10','penerbit10');
+
+
+CREATE TABLE pengarang(
+	kodePengarang VARCHAR(10) PRIMARY KEY,
+	namaPengarang VARCHAR(25) NOT NULL
+);
+
+INSERT INTO pengarang(kodePengarang,namaPengarang) VALUES
+('kpeng1','pengarang1'),('kpeng2','pengarang2'),
+('kpeng3','pengarang3'),('kpeng4','pengarang4'),
+('kpeng5','pengarang5'),('kpeng6','pengarang6'),
+('kpeng7','pengarang7'),('kpeng8','pengarang8'),
+('kpeng9','pengarang9'),('kpeng10','pengarang10');
+
+CREATE TABLE daftarPinjam(
+	nomorPinjam INTEGER PRIMARY KEY,
+	nimFK VARCHAR(10) NOT NULL,
+	kodeBuku VARCHAR(10) NOT NULL,
+	tglPinjam DATE NOT NULL,
+	tglDikembalikan DATE NOT NULL,
+	terlambat INTEGER,
+	denda INTEGER
+);
+
+INSERT INTO daftarPinjam(nomorPinjam,nimFK,kodeBuku,tglPinjam,tglDikembalikan,terlambat,denda) VALUES
+(1,'n1','kb1','1-4-2020','8-4-2020',0,0),(2,'n6','kb1','1-4-2020','8-4-2020',0,0),
+(3,'n2','kb1','1-4-2020','8-4-2020',0,0),(4,'n7','kb1','1-4-2020','8-4-2020',0,0),
+(5,'n3','kb1','1-4-2020','8-4-2020',0,0),(6,'n8','kb1','1-4-2020','8-4-2020',0,0),
+(7,'n4','kb1','1-4-2020','8-4-2020',0,0),(8,'n9','kb1','1-4-2020','8-4-2020',0,0),
+(9,'n5','kb1','1-4-2020','8-4-2020',0,0),(10,'n10','kb1','1-4-2020','8-4-2020',0,0);
