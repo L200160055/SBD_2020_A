@@ -1,0 +1,22 @@
+cd\
+cd xampp\mysql\bin
+
+mysql -u root -p
+
+use perbankan;
+
+SELECT nama_cabang, alamat_cabang FROM cabang_bank ORDER BY nama_cabang;
+
+SELECT no_rekening, pin, saldo FROM rekening ORDER BY saldo DESC;
+
+SELECT rekening.no_rekening, nasabah.nama_nasabah, nasabah.alamat_nasabah FROM
+rekening, nasabah, nasabah_has_rekening WHERE 
+nasabah.id_nasabah= nasabah_has_rekening.id_nasabahFK AND 
+rekening.no_rekening= nasabah_has_rekening.no_rekeningFK ORDER BY 
+nasabah.nama_nasabah;
+
+SELECT rekening.no_rekening, nasabah.nama_nasabah, rekening.saldo FROM
+rekening, nasabah, nasabah_has_rekening WHERE 
+nasabah.id_nasabah=nasabah_has_rekening.id_nasabahFK AND
+rekening.no_rekening=nasabah_has_rekening.no_rekeningFK ORDER BY
+nasabah.nama_nasabah;
