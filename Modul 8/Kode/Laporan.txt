@@ -1,0 +1,35 @@
+cd\
+cd xampp\mysql\bin
+
+mysql -u root -p
+
+use perbankan;
+
+SELECT transaksi.tanggal, transaksi.jenis_transaksi, transaksi.jumlah FROM
+nasabah, transaksi 
+WHERE nasabah.id_nasabah=transaksi.id_nasabahFK 
+AND nasabah.nama_nasabah IN ("Sutopo","Canka Lokanata") 
+ORDER BY transaksi.tanggal;
+
+SELECT transaksi.tanggal, nasabah.nama_nasabah, transaksi.jenis_transaksi,
+transaksi.jumlah FROM nasabah, transaksi 
+WHERE transaksi.tanggal BETWEEN "2009-11-15" AND "2009-11-20" 
+AND nasabah.id_nasabah=transaksi.id_nasabahFK
+ORDER BY transaksi.tanggal, nasabah.nama_nasabah;
+
+SELECT transaksi.jenis_transaksi AS "Jenis Transaksi",SUM(jumlah) AS "Jumlah (Rp)"
+FROM transaksi
+GROUP BY transaksi.jenis_transaksi 
+ORDER BY transaksi.jenis_transaksi;
+
+SELECT jenis_transaksi AS "Jenis Transaksi", MAX(jumlah) AS "Transaksi Terbesar",
+MIN(jumlah) AS "Transaksi Terkecil" FROM transaksi
+GROUP BY transaksi.jenis_transaksi
+ORDER BY transaksi.jenis_transaksi;
+
+SELECT jenis_transaksi AS "Jenis Transaksi", SUM(jumlah) AS "Jumlah (Rp)",
+COUNT(jumlah) AS "Jumlah Transaksi" FROM transaksi
+WHERE tanggal BETWEEN "2009-11-1" AND "2009-11-30" 
+GROUP BY transaksi.jenis_transaksi
+ORDER BY transaksi.jenis_transaksi;
+
