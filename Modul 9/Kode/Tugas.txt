@@ -1,0 +1,26 @@
+cd\
+cd xampp\mysql\bin
+mysql -u root -p
+
+use perbankan;
+INSERT INTO user (user, password) VALUES ('hadid','1234');
+
+GRANT INSERT, UPDATE, DELETE ON perbankan.nasabah TO hadid;
+FLUSH PRIVILEGES;
+
+GRANT SELECT ON perbankan.cabang_bank TO hadid;
+FLUSH PRIVILEGES;
+
+exit;
+
+mysql -u hadid
+
+use perbankan;
+
+SELECT * FROM nasabah;
+
+INSERT INTO nasabah (id_nasabah, nama_nasabah, alamat_nasabah) 
+VALUES (11,'Hadid Aldio Indratama', 'Wonogiri');
+
+INSERT INTO cabang_bank (kode_cabang, nama_cabang, alamat_cabang) 
+VALUES ('BRUJ2','Bank Rut Unit Wonogiri2','Jl.Jatisrono-Jatiroto');
