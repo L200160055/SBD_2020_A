@@ -1,0 +1,19 @@
+cd\
+cd xampp\mysql\bin
+mysql -u root -p
+
+use perbankan;
+
+SELECT * FROM nasabah WHERE nasabah.id_nasabah IN(SELECT DISTINCT 
+transaksi.id_nasabahFK FROM transaksi WHERE jenis_transaksi='kredit');
+
+SELECT * FROM nasabah WHERE nasabah.id_nasabah NOT IN(SELECT DISTINCT
+transaksi.id_nasabahFK FROM transaksi);
+
+SELECT cabang_bank.kode_cabang, cabang_bank.nama_cabang, AVG(rekening.saldo) as
+Rata2 FROM cabang_bank, rekening 
+WHERE cabang_bank.kode_cabang=rekening.kode_cabangFK 
+GROUP BY cabang_bank.kode_cabang HAVING Rata2>=ALL(SELECT AVG(saldo) FROM
+rekening GROUP BY kode_cabangFK);
+
+SELECT * FROM transaksi WHERE jumlah>(SELECT AVG(jumlah)FROM transaksi);
