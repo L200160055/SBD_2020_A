@@ -1,0 +1,44 @@
+cd\
+cd xampp\mysql\bin
+mysql -u root -p
+
+use perbankan;
+
+CREATE TABLE user(
+	user VARCHAR(50) NOT NULL,
+	password VARCHAR(50) NOT NULL
+);
+
+INSERT INTO user(user, password) VALUES ('myuser','myuser');
+
+GRANT SELECT on perbankan.nasabah to myuser;
+
+FLUSH PRIVILEGES;
+
+GRANT SELECT on perbankan.cabang_bank to myuser;
+
+FLUSH PRIVILEGES;
+
+exit;
+
+mysql -u myuser
+
+use perbankan;
+
+SELECT * FROM nasabah;
+INSERT INTO nasabah VALUES('31','Susilo','Sukoharjo');
+
+exit;
+
+mysql -u root -p
+
+REVOKE SELECT on perbankan.nasabah from myuser;
+FLUSH PRIVILEGES;
+
+exit;
+
+mysql -u myuser
+
+USE perbankan;
+
+SELECT * FROM nasabah;
